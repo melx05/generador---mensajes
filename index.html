@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Generador de Mensajes</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 50px;
+    }
+
+    select, button {
+      padding: 10px;
+      margin: 10px;
+      width: 250px;
+    }
+
+    button {
+      background: #00ffcc;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>💬 Generador de Mensajes</h1>
+
+  <select id="tipo">
+    <option value="frio">Cliente frío</option>
+    <option value="interesado">Cliente interesado</option>
+    <option value="seguimiento">Seguimiento general</option>
+  </select>
+
+  <br>
+
+  <button onclick="generar()">Generar mensaje</button>
+
+  <p id="mensaje"></p>
+
+  <script>
+    function generar() {
+      let tipo = document.getElementById("tipo").value;
+      let mensaje = "";
+
+      if (tipo === "frio") {
+        mensaje = "Hola, espero te encuentres bien. Solo quería dar seguimiento para saber si aún estás interesado. Estoy disponible para ayudarte en lo que necesites.";
+      }
+
+      if (tipo === "interesado") {
+        mensaje = "Hola, gracias por tu interés. Quería consultarte si tienes alguna duda o si deseas avanzar con el proceso. Estoy aquí para ayudarte.";
+      }
+
+      if (tipo === "seguimiento") {
+        mensaje = "Hola, paso por aquí para darte seguimiento. Avísame si aún estás interesado o si necesitas más información.";
+      }
+
+      document.getElementById("mensaje").innerText = mensaje;
+    }
+  </script>
+
+</body>
+</html>
