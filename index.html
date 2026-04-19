@@ -6,63 +6,131 @@
 
   <style>
     body {
-      font-family: Arial;
-      background: #111;
-      color: white;
-      text-align: center;
-      padding: 50px;
+      font-family: Arial, sans-serif;
+      background: #0d0d0d;
+      color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
     }
 
-    select, button {
+    .container {
+      background: #1a1a1a;
+      padding: 30px;
+      border-radius: 12px;
+      width: 320px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    h1 {
+      font-size: 20px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    input, select, button {
+      width: 100%;
       padding: 10px;
-      margin: 10px;
-      width: 250px;
+      margin-bottom: 12px;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    input, select {
+      background: #2a2a2a;
+      color: white;
     }
 
     button {
-      background: #00ffcc;
-      border: none;
+      background: #00c896;
+      color: black;
       cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #00e6aa;
+    }
+
+    .copy {
+      background: #444;
+      color: white;
+    }
+
+    #mensaje {
+      margin-top: 15px;
+      font-size: 14px;
+      line-height: 1.4;
+      background: #111;
+      padding: 10px;
+      border-radius: 6px;
+      min-height: 60px;
     }
   </style>
 </head>
 
 <body>
 
-  <h1>💬 Generador de Mensajes</h1>
+  <div class="container">
+    <h1>💬 Generador</h1>
 
-  <select id="tipo">
-    <option value="frio">Cliente frío</option>
-    <option value="interesado">Cliente interesado</option>
-    <option value="seguimiento">Seguimiento general</option>
-  </select>
+    <input type="text" id="nombre" placeholder="Nombre del cliente">
 
-  <br>
+    <select id="tipo">
+      <option value="frio">Cliente frío</option>
+      <option value="interesado">Interesado</option>
+      <option value="seguimiento">Seguimiento</option>
+    </select>
 
-  <button onclick="generar()">Generar mensaje</button>
+    <select id="tono">
+      <option value="formal">Formal</option>
+      <option value="amigable">Amigable</option>
+    </select>
 
-  <p id="mensaje"></p>
+    <button onclick="generar()">Generar mensaje</button>
+    <button class="copy" onclick="copiar()">Copiar</button>
+
+    <div id="mensaje"></div>
+  </div>
 
   <script>
     function generar() {
+      let nombre = document.getElementById("nombre").value || "Hola";
       let tipo = document.getElementById("tipo").value;
+      let tono = document.getElementById("tono").value;
+
       let mensaje = "";
 
       if (tipo === "frio") {
-        mensaje = "Hola, espero te encuentres bien. Solo quería dar seguimiento para saber si aún estás interesado. Estoy disponible para ayudarte en lo que necesites.";
+        mensaje = `${nombre}, espero te encuentres bien. Solo quería retomar el contacto y saber si aún estás interesado. Quedo atento a cualquier consulta.`;
       }
 
       if (tipo === "interesado") {
-        mensaje = "Hola, gracias por tu interés. Quería consultarte si tienes alguna duda o si deseas avanzar con el proceso. Estoy aquí para ayudarte.";
+        mensaje = `${nombre}, gracias por tu interés. Si deseas avanzar o tienes dudas, estoy disponible para ayudarte en todo el proceso.`;
       }
 
       if (tipo === "seguimiento") {
-        mensaje = "Hola, paso por aquí para darte seguimiento. Avísame si aún estás interesado o si necesitas más información.";
+        mensaje = `${nombre}, paso por aquí para dar seguimiento. Avísame si deseas continuar o si necesitas más información.`;
+      }
+
+      if (tono === "amigable") {
+        mensaje += " 😊";
       }
 
       document.getElementById("mensaje").innerText = mensaje;
+    }
+
+    function copiar() {
+      let texto = document.getElementById("mensaje").innerText;
+      navigator.clipboard.writeText(texto);
+      alert("Mensaje copiado");
     }
   </script>
 
 </body>
 </html>
+
+
